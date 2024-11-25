@@ -30,7 +30,7 @@ export default async function handler(
     }
 
     const response = await fetch(
-      `${OPEN_WEATHER_API_URL}/weather?q=${searchTerm}&appid=${OPEN_WEATHER_API_KEY}`
+      `${OPEN_WEATHER_API_URL}/weather?q=${searchTerm}&appid=${OPEN_WEATHER_API_KEY}&units=metric`
     );
 
     if (!response.ok) {

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/lodash": "^4.17.13",
+    "bootstrap-icons": "^1.11.3",
     "dotenv": "^16.4.5",
     "lodash": "^4.17.21",
     "next": "15.0.3",
