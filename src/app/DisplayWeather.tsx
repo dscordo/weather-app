@@ -20,7 +20,10 @@ export default function DisplayWeather(weatherData: {
 
   function timeConverter(unixTimestamp: number) {
     const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
-    return date.toLocaleTimeString();
+    return date.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   }
   const weatherObj = {
     location: weatherData.weatherData.name,
