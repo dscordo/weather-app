@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import WeatherImage from './WeatherImage';
 
 export default function DisplayWeather(weatherData: {
   weatherData: {
@@ -16,8 +17,6 @@ export default function DisplayWeather(weatherData: {
   };
 }) {
   const weatherDesc = _.get(weatherData, 'weatherData.weather[0]');
-
-  console.log(weatherData.weatherData);
 
   function timeConverter(unixTimestamp: number) {
     const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
@@ -38,25 +37,93 @@ export default function DisplayWeather(weatherData: {
   };
 
   return (
-    <div className=" bg-transparent border border-yellow-300 rounded-xl">
-      <h2 className="text-3xl">The weather today</h2>
-      <span className="text-xl text-white p-1">
-        <strong>Your chosen location: {weatherObj?.location}</strong>
-      </span>
-      {/* <WeatherImage weatherObj={weatherObj} /> */}
-      <ul>
-        <li>{weatherObj?.description}</li>
-        <li>Current temp: {weatherObj?.temp}ºC</li>
-        <li>Feels like: {weatherObj?.tempFeel}ºC</li>
-        <li>Max temp: {weatherObj?.tempMax}ºC</li>
-        <li>Min temp: {weatherObj?.tempMin}ºC</li>
-        <li>Humidity: {weatherObj?.humidity}%</li>
-        <li>Wind speed: {weatherObj?.wind} mph</li>
-      </ul>
-      <span>
-        <p>Sunrise: {weatherObj?.sunrise}</p>
-        <p>Sunset: {weatherObj?.sunset}</p>
-      </span>
+    <div className="container">
+      <div className="flex flex-wrap w-full lg:w-auto">
+        <div className="w-full lg:w-1/2 flex rounded-lg">
+          <div className="rounded-lg py-6 pl-8 pr-32 w-full bg-blue-400 opacity-90 text-white">
+            <div className="mb-20">
+              <h2 className="font-bold text-xl leading-none pb-1">
+                Currently in:
+              </h2>
+              <p className="flex aling-center opacity-75">
+                <i className="bi bi-geo-alt-fill"></i>
+                {weatherObj?.location}
+              </p>
+            </div>
+            <div className="mb-10">
+              <WeatherImage weatherObj={weatherObj} />
+              <strong className="leading-none text-6xl block font-weight-bolder">
+                {weatherObj?.temp}ºC
+              </strong>
+              <b className="text-2xl block font-bold">
+                {weatherObj?.description}
+              </b>
+            </div>
+            <div className="flex justify-between w-64 mb-4 w-full">
+              <div className="w-auto font-bold text-90">
+                Feels like:
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.tempFeel}ºC
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full lg:w-1/2 flex ml-0">
+          <div className="lg:my-3 bg-gray-800 text-white p-8 lg:rounded-r-lg w-full">
+            <div className="flex justify-between w-64 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-sunrise"></i> Sunrise
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.sunrise}
+              </div>
+            </div>
+            <div className="flex justify-between w-64  mb-4 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-sunset"></i> Sunset
+              </div>
+
+              <div className="w-auto text-right">
+                {weatherObj?.sunset}
+              </div>
+            </div>
+            <div className="flex justify-between w-64 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-thermometer-high"></i> Max temp
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.tempMax}ºC
+              </div>
+            </div>
+            <div className="flex justify-between w-64 mb-8 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-thermometer-low"></i> Min temp
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.tempMin}ºC
+              </div>
+            </div>
+            <div className="flex justify-between w-64 mb-4 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-moisture"></i> Humidity
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.humidity} %
+              </div>
+            </div>
+            <div className="flex justify-between w-64 mb-8 w-full">
+              <div className="w-auto font-bold uppercase text-90">
+                <i className="bi bi-wind"></i> Wind
+              </div>
+              <div className="w-auto text-right">
+                {weatherObj?.wind} Mph
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
