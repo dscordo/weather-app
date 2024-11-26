@@ -24,10 +24,10 @@ export default function DisplayWeather(weatherData: {
   }
   const weatherObj = {
     location: weatherData.weatherData.name,
-    tempMax: weatherData.weatherData.main.temp_max,
-    tempMin: weatherData.weatherData.main.temp_min,
-    temp: weatherData.weatherData.main.temp,
-    tempFeel: weatherData.weatherData.main.feels_like,
+    tempMax: Math.floor(weatherData.weatherData.main.temp_max),
+    tempMin: Math.floor(weatherData.weatherData.main.temp_min),
+    temp: Math.floor(weatherData.weatherData.main.temp),
+    tempFeel: Math.floor(weatherData.weatherData.main.feels_like),
     icon: weatherDesc?.icon,
     description: weatherDesc?.main,
     sunrise: timeConverter(weatherData.weatherData.sys.sunrise),
@@ -42,7 +42,7 @@ export default function DisplayWeather(weatherData: {
         <div className="w-full lg:w-1/2 flex rounded-lg">
           <div className="rounded-lg py-6 pl-8 pr-32 w-full bg-blue-400 opacity-90 text-white">
             <div className="mb-20">
-              <h2 className="font-bold text-xl leading-none pb-1">
+              <h2 className="font-bold text-l leading-none pb-1">
                 Currently in:
               </h2>
               <p className="flex aling-center opacity-75">
@@ -60,8 +60,8 @@ export default function DisplayWeather(weatherData: {
               </b>
             </div>
             <div className="flex justify-between w-64 mb-4 w-full">
-              <div className="w-auto font-bold text-90">
-                Feels like:
+              <div className="font-bold text-left mr-1">
+                RealFeel:
               </div>
               <div className="w-auto text-right">
                 {weatherObj?.tempFeel}ºC
